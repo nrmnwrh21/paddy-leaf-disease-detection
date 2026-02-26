@@ -1,31 +1,61 @@
 # 🌾 Paddy Leaf Disease Detection Using Deep Learning
 
-## 📌 Overview
+## 📌 Project Overview
 
-This project implements a deep learning-based image classification system to detect paddy leaf diseases using **Transfer Learning**. The model classifies paddy leaf images into four disease categories using a fine-tuned **MobileNetV2** architecture.
+This project was developed as part of my academic exploration in Deep Learning and Computer Vision. The goal is to classify paddy leaf diseases using a Transfer Learning approach with MobileNetV2.
 
-This system aims to assist in early detection of crop diseases to improve agricultural productivity and reduce manual inspection effort.
+By applying deep learning techniques, this system helps automate disease detection from leaf images, which can support early agricultural intervention.
 
 ---
 
 ## 🎯 Objectives
 
-- Detect and classify paddy leaf diseases automatically
-- Apply transfer learning using MobileNetV2
-- Improve model generalization using data augmentation
-- Evaluate model performance using accuracy and confusion matrix
-- Prevent overfitting through regularization techniques
+- Apply Transfer Learning using MobileNetV2
+- Perform dataset splitting (Train/Validation/Test)
+- Improve generalization using data augmentation
+- Evaluate model performance using multiple metrics
+- Explore hyperparameter tuning for performance improvement
 
 ---
 
-## 🧠 Model Architecture
+## 🧠 Model Approach
 
-- **Base Model:** MobileNetV2 (Pretrained on ImageNet)
-- **Custom Classification Head:**
+- Pretrained Model: **MobileNetV2 (ImageNet weights)**
+- Custom Layers:
   - GlobalAveragePooling2D
-  - Dense Layer (ReLU)
-  - Dropout Layer
-  - Softmax Output Layer (4 Classes)
+  - Dense (ReLU)
+  - Dropout
+  - Softmax Output Layer
+- Optimizer: Adam
+- Loss Function: Categorical Crossentropy
+
+The base model was frozen during initial training to utilize pretrained feature extraction.
+
+---
+
+## 📊 Model Performance
+
+The model was evaluated using:
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- Confusion Matrix
+
+Test accuracy achieved approximately **~98–99%**, depending on tuning configuration.
+
+---
+
+## 🔬 Hyperparameter Tuning
+
+I experimented with:
+
+- Dropout rate (0.2 – 0.5)
+- Dense layer units (64 – 256)
+- EarlyStopping to prevent overfitting
+
+Keras Tuner was used to compare configurations and select the best-performing model.
 
 ---
 
@@ -36,75 +66,30 @@ paddy-leaf-disease-detection/
 │
 ├── data/
 │   ├── train/
-│   └── validation/
-│
-├── notebooks/
-│   └── training.ipynb
+│   ├── validation/
+│   └── test/
 │
 ├── models/
-│   └── best_model.h5
+│   ├── paddy_leaf_model.h5
+│   ├── paddy_leaf_best_model.h5
+│   └── class_labels.pkl
+│
+├── results/
+│   ├── confusion_matrix.png
+│   └── test_metrics.png
 │
 ├── src/
 │   ├── train.py
+│   ├── evaluate.py
 │   ├── predict.py
-│   ├── preprocessing.py
+│   └── tune.py
 │
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 ---
 
-## ⚙️ Technologies Used
-
-- Python
-- TensorFlow / Keras
-- MobileNetV2
-- Keras Tuner
-- NumPy
-- Matplotlib
-- Scikit-learn
-- OpenCV
-
----
-
-## 📊 Model Performance
-
-- Training Accuracy: ~99%
-- Validation Accuracy: ~98–99%
-- Evaluation Metrics:
-  - Accuracy
-  - Confusion Matrix
-  - Precision
-  - Recall
-
----
-
-## 🗂 Dataset Structure
-
-```
-data/
- ├── train/
- │   ├── Disease_1/
- │   ├── Disease_2/
- │   ├── Disease_3/
- │   ├── Disease_4/
- └── validation/
-```
-
----
-
-## 🔄 Data Preprocessing & Augmentation
-
-- Rescaling (1./255)
-- Random Rotation
-- Zoom Augmentation
-- Horizontal Flip
-- Image Resizing (224x224)
-
----
-
-## 🚀 How to Run the Project
+## 🚀 How to Run
 
 ### 1️⃣ Install Dependencies
 
@@ -112,38 +97,43 @@ data/
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Train the Model
+### 2️⃣ Train Model
 
 ```bash
 python src/train.py
 ```
 
-### 3️⃣ Predict a New Image
+### 3️⃣ Evaluate Model
 
 ```bash
-python src/predict.py --image path_to_image.jpg
+python src/evaluate.py
+```
+
+### 4️⃣ Predict Image
+
+```bash
+python src/predict.py --image sample.jpg
 ```
 
 ---
 
-## 📈 Future Improvements
+## 📚 Learning Outcomes
 
-- Implement EarlyStopping & Learning Rate Scheduler
-- Deploy model using Streamlit web app
-- Convert model to TensorFlow Lite for mobile deployment
-- Integrate real-time camera-based disease detection
+Through this project, I gained hands-on experience in:
+
+- Transfer Learning
+- Image Preprocessing & Augmentation
+- Model Evaluation & Metrics Interpretation
+- Overfitting Prevention Techniques
+- Hyperparameter Tuning
+- Organizing ML Projects into Modular Structure
 
 ---
 
-## 👩‍💻 Author
+## 👩‍💻 About Me
 
-**Nur Munawwarah Binti Muzamil**  
+Nur Munawwarah Binti Muzamil  
 Bachelor of Computer Engineering Technology (Computer Systems)  
-AI & Machine Learning Enthusiast  
+Universiti Kuala Lumpur  
 
-📧 Email: nurmunawwarah1@gmail.com  
-🔗 LinkedIn: linkedin.com/in/nurmunawwarah  
-
----
-
-⭐ If you found this project useful, feel free to give it a star!
+This project reflects my academic learning journey in Artificial Intelligence and Computer Vision.
